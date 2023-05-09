@@ -31,18 +31,18 @@ export const BudgetsProvider=({children})=>{
 
     }
     function deletebudget({id}){
-        setBudgets(prevBudgets=>{
-            return prevBudgets.filter(budget=>budget.id!==id)
-        })
-    }
-    function deleteExpenses({id}){
         setExpenses(prevExpenses=>{
             return prevExpenses.map(expense=>{
                 if(expense.budgetId!==id) return expense
                 return {...expense,budgetId:UNCATEGORIZED_BUDGET_ID}
             })
         })
-        setBudgets(prevExpenses=>{
+        setBudgets(prevBudgets=>{
+            return prevBudgets.filter(budget=>budget.id!==id)
+        })
+    }
+    function deleteExpenses({id}){
+        setExpenses(prevExpenses=>{
             return prevExpenses.filter(expense=>expense.id!==id)
         })
 
